@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import PackagesView from "./pages/PackagesView"; // update path if needed
+import Dashboard from "./pages/Dashboard"; // example
+import Sidebar from "./components/layout/Sidebar"; // example
+import RightPanel from "./components/dashboard/RightPanel";
+import MainLayout from "./components/layout/MainLayout";
+import './index.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="flex">
+        <Sidebar />
+        <div className="flex-grow">
+       <Routes>
+          <Route
+            path="/"
+            element={
+              <MainLayout>
+                <Dashboard />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/packages"
+            element={
+              <MainLayout>
+                <PackagesView />
+              </MainLayout>
+            }
+          />
+        </Routes>
+        </div>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
